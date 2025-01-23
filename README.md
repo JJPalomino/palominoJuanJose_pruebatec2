@@ -49,7 +49,7 @@ El proyecto utiliza tecnologías Java, JPA y JSP para el desarrollo del backend 
 ---
 
 ## Instalación
-1. Clona este repositorio:  https://github.com/JJPalomino/palominoJuanJose_pruebatec1.git
+1. Clona este repositorio: https://github.com/JJPalomino/palominoJuanJose_pruebatec2.git
 2. Navega al directorio del proyecto: palominoJuanJose_pruebatec1
 3. Importa el proyecto en tu IDE preferido (IntelliJ IDEA, Eclipse, etc.).
 4. Configura la conexión a la base de datos. Asegúrate de que el archivo `persistence.xml` tenga la configuración correcta para la base de datos `turnero`.
@@ -62,6 +62,7 @@ El proyecto utiliza tecnologías Java, JPA y JSP para el desarrollo del backend 
 - Crea la base de datos empleados utilizando el archivo proporcionado `empleados.sql`.
 
 ##Configura la aplicación
+
 - Asegúrate de tener instalado JDK 17 y un IDE como NetBeans o IntelliJ.
 - Modifica el archivo `persistence.xml` en la carpeta `META-INF` con tus credenciales de base de datos:
 ```
@@ -71,8 +72,20 @@ El proyecto utiliza tecnologías Java, JPA y JSP para el desarrollo del backend 
 ```
  
 ##Ejecución
-   - Desplegar la aplicación en el servidor Apache Tomcat.
-   - Acceder mediante el navegador a la URL configurada (Ej: `http://localhost:8080/turnero`).
+- Recuerde agregar las dependencias necesarias para el correcto funcionamiento del servidor.
+- Deberá cambiar la versión de maven war a 3.3.2 o superior:
+```
+<plugin>                                
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-war-plugin</artifactId>
+    <version>3.3.2</version>
+    <configuration>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+    </configuration>
+</plugin>
+```
+- Desplegar la aplicación en el servidor Apache Tomcat.
+- - Acceder mediante el navegador a la URL configurada (Ej: `http://localhost:8080/turnero`).
 
 ---
 
