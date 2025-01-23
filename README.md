@@ -113,7 +113,7 @@ El proyecto utiliza tecnologías Java, JPA y JSP para el desarrollo del backend 
 ---
 
 ## Diagrama de Clases
-El diagrama de clases está incluido como archivo adjunto en el directorio `/docs` del repositorio.
+![Image](https://github.com/user-attachments/assets/5b06464e-6c00-4623-95e1-0fafe0623f69)
 
 ---
 
