@@ -6,7 +6,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Creación de citas</title>
+        <title>Creación de Tramites</title>
         <!-- estilo de la web-->    
         <style>
             * {

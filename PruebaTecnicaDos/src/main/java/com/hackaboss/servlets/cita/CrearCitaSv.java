@@ -50,47 +50,24 @@ public class CrearCitaSv extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-        // Capturar parámetros del formulario
         String ciudadanoCURP = request.getParameter("ciudadano");
         String tramiteNombre = request.getParameter("tramite");
-        String fechaTexto = request.getParameter("fecha");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fecha = LocalDate.parse(request.getParameter("fecha"),formatter);
         String hora = request.getParameter("hora");
-
-        // Validaciones básicas
-        if (ciudadanoCURP == null || ciudadanoCURP.isEmpty() ||
-            tramiteNombre == null || tramiteNombre.isEmpty() ||
-            fechaTexto == null || fechaTexto.isEmpty() ||
-            hora == null || hora.isEmpty()) {
+        if (ciudadanoCURP == null || ciudadanoCURP.isEmpty()
+                || tramiteNombre == null || tramiteNombre.isEmpty()
+                || hora == null || hora.isEmpty()) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Todos los campos son obligatorios");
             return;
+        }else{
+            Ciudadano ciudadano = control.buscarCiudadanoCURP(ciudadanoCURP);
+            Tramite tramite = control.buscarTramiteNom(tramiteNombre);
+
+            Cita cita = new Cita(fecha, hora, tramite, ciudadano);
+            control.crearCita(cita);
+        
         }
-
-        // Parseo de la fecha
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate fecha = LocalDate.parse(fechaTexto, formatter);
-
-        // Búsqueda de entidades
-        Ciudadano ciudadano = control.buscarCiudadanoCURP(ciudadanoCURP);
-        Tramite tramite = control.buscarTramiteNom(tramiteNombre);
-
-        if (ciudadano == null || tramite == null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Ciudadano o trámite no válido");
-            return;
-        }
-
-        // Crear cita
-        Cita cita = new Cita(fecha, hora, tramite, ciudadano);
-        control.crearCita(cita);
-
-        // Respuesta exitosa
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println("Cita creada con éxito");
-
-    } catch (Exception e) {
-        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al procesar la solicitud");
-        e.printStackTrace();
-    }
         
         }
 

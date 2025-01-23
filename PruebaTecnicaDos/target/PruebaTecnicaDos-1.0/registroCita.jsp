@@ -1,5 +1,6 @@
+<%@page import="com.hackaboss.logica.Cita"%>
 <%@page import="com.hackaboss.logica.Tramite"%>
-<%@page import="com.hackaboss.logica.Ciudadano"%>
+
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -240,5 +241,66 @@
                 </form>
             </div>
         </div>
+    <div class="container">
+            <div class="section active">
+                <h2>Lista de Citas</h2>
+                <br>
+                <form action="CrearCiudadanoSv" method="GET">
+                    <button type="submit" class="btn btn-primary">Mostrar</button>
+                    <div class="results-table mt-4">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Estado</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Tramite</th>
+                                    <th>Ciudadano</th>
+                                </tr>    
+                            </thead>
+                            <tbody>
+                                <%
+                                List<Cita> listaCitas = (List) request.getSession().getAttribute("listaCitas");
+                                if (listaCitas != null) {
+
+                                for (Cita cita:listaCitas) {%>
+                                    <tr>
+                                        <td><%=cita.isEstado()%> </td>
+                                        <td><%=cita.getFecha()%> </td>
+                                        <td><%=cita.getHora()%> </td>
+                                        <td><%=cita.getTramite()%> </td>
+                                        <td><%=cita.getCiudadano()%> </td>
+
+                                        
+                                        <td  style="display: flex; width: 230px;"> 
+                                            
+                                            <form name="eliminar" action="EliminarCitaSv" method="POST"> 
+                                                <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color:red; margin-right: 5px; "> 
+                                                    <i class="fas fa-trash-alt"></i>Eliminar</button>
+                                                <input type="hidden" name="id_cita" value="<%=cita.getId()%>"> 
+                                            </form>
+
+                                            <form name="editar" action="EditarCitaSv" method="GET"> 
+                                                <button type="submit" class="btn btn-primary btn-user btn-block"; style="margin-left: 5px;"> 
+                                                    <i class="fas fa-pencil-alt"></i>Editar
+                                                </button>
+                                                <input type="hidden" name="id_cita" value="<%=cita.getId()%>"> <!-- esto es para mandar el codigo al servlet -->
+                                            </form> 
+
+                                        </td>
+                                    </tr>      
+                                    <%
+                                        }%>
+                                </tbody>  
+                                <%}%>
+                        </table>
+                    </div>  
+                </form>
+            </div>
+        </div>   
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                            
+                            
     </body>
 </html>

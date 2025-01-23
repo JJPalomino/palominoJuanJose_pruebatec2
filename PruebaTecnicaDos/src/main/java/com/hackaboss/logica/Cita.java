@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 
 @Entity
 public class Cita implements Serializable {
@@ -19,7 +20,7 @@ public class Cita implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private boolean estado = true;
+    private Boolean estado = true;
     private LocalDate fecha;
     private String hora;
  
@@ -90,7 +91,12 @@ public class Cita implements Serializable {
         this.ciudadano = ciudadano;
     }
 
-    
+    @PrePersist
+    protected void prePersist(){
+        if(this.estado == null){
+            this.estado = true;
+        }
+    }
     
 
     

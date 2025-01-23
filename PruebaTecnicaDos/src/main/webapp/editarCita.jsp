@@ -1,11 +1,11 @@
-<%@page import="com.hackaboss.logica.Ciudadano"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Edición de Ciudadano</title>
+        <title>Edición de Citas</title>
         <style>
             * {
                 margin: 0;
@@ -22,7 +22,7 @@
             }
 
             .container {  /*Aumenta o reduce el contenido del recuadro donde va la cita*/
-                max-width: 1500px;
+                max-width: 1200px;
                 margin: 20px auto;
                 background-color: #a6a6a6;
                 padding: 22px;
@@ -73,7 +73,7 @@
             }
 
             .form-group {
-                margin-bottom: 20px;
+                margin-bottom: 15px;
             }
 
             label {
@@ -93,7 +93,7 @@
             .grid {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
+                gap: 20px;
             }
 
             button {   /*Estilo del boton*/
@@ -134,7 +134,7 @@
             .section.active {
                 display: block;
             }
-            
+
             .back-button {
                 position: absolute; /* Posición fija relativa a la barra */
                 top: 10px; /* Ajusta según el espacio que desees */
@@ -153,8 +153,8 @@
                 background-color: #800000;
                 color: #ffffff;
             }
+
         </style>
-    
     </head>
     <body>
         <div class="header">
@@ -163,58 +163,80 @@
                 <span class="header-text">Gobierno de Palomino</span>
             </div>
         </div>
-        
+
         <div class="container">
             <div class="section active">
-                <h2>Editar Ciudadano</h2>
+                <h2>Nueva Cita</h2>
                 <br>
-                <form action="CrearCiudadanoSv" method="POST">
-                    <%Ciudadano ciudadano = (Ciudadano) request.getSession().getAttribute("editar_ciudadano"); %>
-                        <div class="grid">
-                        <div class="form-group">
-                            <label for="nombre">Nombre:</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese Nombre" value="<%=ciudadano.getNombre()%>">
-                        </div>
-                        <div class="form-group">
-                            <label for="apellido">Apellido:</label>
-                            <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido" value="<%=ciudadano.getApellido()%>">
-                        </div>
-                    </div>
-                    <br>
+                <form action="CrearCitaSv" method="GET">
+                    <button type="submit">Nueva Cita</button>
+                </form>
+                <form action="CrearCitaSv" method="POST">
                     <div class="grid">
                         <div class="form-group">
-                            <label for="curp">CURP</label>
-                            <input type="text" class="form-control" id="curp" name="curp" placeholder="CURP" value="No se puede modificar">
+                            <label for="ciudadano">Ciudadano:</label>
+                            <select id="ciudadano">
+                                <%
+                                    // Asegúrate de que la lista no sea null antes de iterar
+                                    List<Ciudadano> listaCiudadanos = (List<Ciudadano>) request.getAttribute("listaCiudadanos");
+                                    if (listaCiudadanos != null && !listaCiudadanos.isEmpty()) {
+                                        for (Ciudadano ciudadano : listaCiudadanos) {
+                                %>
+                                <option value="<%= ciudadano.getCURP()%>"><%= ciudadano.getNombre()%></option>
+                                <%
+                                    }
+                                } else {
+                                %>
+                                <option value="">No hay ciudadanos disponibles</option>
+                                <%
+                                    }
+                                %>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="fecha">Fecha de nacimiento:</label>
-                            <input type="date" class="form-control" id="fecha" name="fecha" value="<%=ciudadano.getFechaNocimiento()%>">
+                            <label for="tramite">Trámite:</label>
+                            <select id="tramite">
+                                <%
+                                    // Obtén la lista de trámites del request y verifica que no sea null
+                                    List<Tramite> listaTramites = (List<Tramite>) request.getAttribute("listaTramites");
+                                    if (listaTramites != null && !listaTramites.isEmpty()) {
+                                        for (Tramite tramite : listaTramites) {
+                                %>
+                                <option value="<%= tramite.getNombreTramite()%>"><%= tramite.getDescripcion()%></option>
+                                <%
+                                    }
+                                } else {
+                                %>
+                                <option value="">No hay trámites disponibles</option>
+                                <%
+                                    }
+                                %>
+                            </select>
                         </div>
                     </div>
-                    <br>    
                     <div class="grid">
                         <div class="form-group">
-                            <label for="email">Correo Electrónico:</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Correo electrónico" value="<%=ciudadano.getEmail()%>">
+                            <label for="fecha">Fecha:</label>
+                            <input type="date" id="fecha" name="fecha" required>
                         </div>
                         <div class="form-group">
-                            <label for="telefono">Teléfono:</label>
-                            <input type="text" class="form-control"  id="telefono" name="telefono" placeholder="Teléfono" value="<%=ciudadano.getTelefono()%>">
+                            <label for="hora">Hora:</label>
+                            <select id="hora">
+                                <option value=" ">Seleccione la hora</option>
+                                <option value="09">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                            </select>
                         </div>
                     </div>
-                    <br>    
-                    <div class="grid">
-                        <div class="form-group">
-                            <label for="direccion">Dirección</label>
-                            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección" value="<%=ciudadano.getDireccion()%>">
-                        </div>
-                    </div>
-                    <button type="submit">Guardar</button>    
-                </form>  
+                   <button type="submit">Registrar Ciudadano</button> 
+                </form>
+            </div>
         </div>
-              
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
     </body>
 </html>
