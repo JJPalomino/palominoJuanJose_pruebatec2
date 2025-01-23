@@ -117,21 +117,6 @@ El proyecto utiliza tecnologías Java, JPA y JSP para el desarrollo del backend 
 
 ---
 
-## Entregables
-
-1. **Repositorio GitHub:**
-   - Código fuente con formato de nombre: `palominoJuanJose_pruebatec2`.
-
-2. **Base de Datos:**
-   - Nombre: `turnero`.
-   - Formato: SQL.
-   - Incluye datos de prueba.
-
-3. **Documentación:**
-   - **README:**
-     - Instrucciones para ejecutar y probar la aplicación.
-     - Usuarios y contraseñas (base de datos, servidor, etc.).
-     - Supuestos realizados.
 
 ## Licencia
 Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
