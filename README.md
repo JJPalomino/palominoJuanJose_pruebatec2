@@ -31,7 +31,7 @@ El proyecto utiliza tecnologías Java, JPA y JSP para el desarrollo del backend 
 
 ### Requisitos de software:
 - Java 17 o superior
-- - MySQL o cualquier base de datos compatible con JPA
+- MySQL o cualquier base de datos compatible con JPA
 - Un IDE para desarrollar el código (se recomienda IntelliJ IDEA o Eclipse)
 
 ### Backend:
@@ -44,7 +44,7 @@ El proyecto utiliza tecnologías Java, JPA y JSP para el desarrollo del backend 
 ### Frontend:
 - **JSP:** Tecnología para la interacción con el usuario.
 - **HTML, CSS y JavaScript Vanilla:**
-  - Plantillas con diseño responsivo (se sugiere Bootstrap).
+- Plantillas con diseño responsivo (se sugiere Bootstrap).
 
 ---
 
