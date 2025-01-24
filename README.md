@@ -9,7 +9,7 @@ El proyecto utiliza tecnologías Java, JPA y JSP para el desarrollo del backend 
 ---
 
 ## Funcionalidades
-
+---
 ### Gestión de Turnos:
 1. **Agregar un nuevo turno/cita:**
    - Registrar información de un turno, incluyendo:
@@ -26,7 +26,40 @@ El proyecto utiliza tecnologías Java, JPA y JSP para el desarrollo del backend 
 3. **Filtrar turnos:**
    - Visualizar únicamente turnos "En espera" o "Ya atendidos".
 ---
+### Gestión de Ciudadanos:
+1. **Agregar un nuevo ciudadano:**
+   - Registrar información del ciudadano, incluyendo:
+     - Nombre.
+     - Apellido.
+     - Fecha de nacimiento.
+     - CURP.
+     - Dirección.
+     - Teléfono.
+     - Correo electrónico.
+     - Estado (true/false).
+   - Un ciudadano puede tener un turno asignado por trámite, sin embargo, puede obtener varios turnos para diferentes trámites.
 
+2. **Lista de ciudadanos:**
+   - Mostrar una lista de todos los ciudadanos y su información.
+
+3. **Filtrar ciudadanos:**
+   - Visualizar únicamente ciudadanos "Activos".
+   - ---
+   ### Gestión de Trámites:
+   1. **Agregar un nuevo trámite:**
+   - Registrar información del trámite, incluyendo:
+     - Nombre.
+     - Descripción.
+     - Estado (true/false).
+   - Un trámite esta asignado tanto a una cita como a un usuario.
+
+2. **Lista de trémites:**
+   - Mostrar una lista de todos los trámites y su información.
+
+3. **Filtrar trámites:**
+   - Visualizar únicamente trámites "Activos".
+  
+     
 ## Requisitos Técnicos
 
 ### Requisitos de software:
@@ -115,8 +148,23 @@ El proyecto utiliza tecnologías Java, JPA y JSP para el desarrollo del backend 
 ## Diagrama de Clases
 ![Image](https://github.com/user-attachments/assets/5b06464e-6c00-4623-95e1-0fafe0623f69)
 
+## Vista Previa
+### Menú principal
 ---
-
+![Image](https://github.com/user-attachments/assets/6492b18a-dc17-47e4-a018-602dd037726f)
+---
+### Menú de gestión de Citas
+---
+![Image](https://github.com/user-attachments/assets/bc27afde-f2bc-4db9-ba64-d86729f07b60)
+---
+### Menú de gestión de Usuarios
+---
+![Image](https://github.com/user-attachments/assets/b3776a78-9195-4e45-9f8a-7d4393f98a15)
+---
+### Menú de gestión de Trámites
+---
+![Image](https://github.com/user-attachments/assets/a6a39498-9f94-4ef3-a217-4a6772832c86)
+---
 
 ## Licencia
 Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
