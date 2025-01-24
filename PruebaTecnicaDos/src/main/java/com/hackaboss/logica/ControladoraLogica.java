@@ -2,7 +2,9 @@ package com.hackaboss.logica;
 
 import com.hackaboss.persistencia.ControladoraPersistencia;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,17 +59,46 @@ public class ControladoraLogica {
 
 
     public Ciudadano buscarCiudadanoCURP(String ciudadanoCURP) {
-        return controlPersis.crearCiudadanoCURP(ciudadanoCURP);
+        return controlPersis.buscarCiudadanoCURP(ciudadanoCURP);
         
     }
 
     public Tramite buscarTramiteNom(String tramiteNombre) {
         return controlPersis.buscarTramiteNom(tramiteNombre);
     }
-
-    public void crearCita(Cita cita) {
+    
+    public void crearCita(String CURP, String nombreTramite, LocalDate fecha, String hora, String descripcion, boolean estado) {
+        Ciudadano ciudadano = controlPersis.buscarCiudadanoCURP(CURP);
+        Tramite tramite = controlPersis.buscarTramiteNom(nombreTramite);
+        Cita cita = new Cita();
+        cita.setCiudadano(ciudadano);
+        cita.setTramite(tramite);
+        cita.setFecha(fecha);
+        cita.setHora(hora);
+        cita.setDescripcion(descripcion);
+        cita.setEstado(estado);
+        
         controlPersis.crearCita(cita);
     }
+
+    public List<Cita> traerCitas() {
+        List<Cita> citas = new ArrayList<>();
+        return citas  =controlPersis.traerCitas();
+    }
+
+    public void eliminarCita(Long id) {
+        controlPersis.eliminarCita(id);
+    }
+
+    public Cita buscarCita(Long id) {
+        return controlPersis.buscarCita(id);
+    }
+
+
+    
+
+    
+    
 
    
 

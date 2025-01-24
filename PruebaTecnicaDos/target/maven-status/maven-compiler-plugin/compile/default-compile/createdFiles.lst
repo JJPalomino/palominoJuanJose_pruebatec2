@@ -1,5 +1,4 @@
 com\hackaboss\logica\Ciudadano_.class
-com\hackaboss\servlets\cita\EditarCitaSv.class
 com\hackaboss\servlets\cita\EliminarCitaSv.class
 com\hackaboss\servlets\ciudadanos\CrearCiudadanoSv.class
 com\hackaboss\logica\Usuario_.class

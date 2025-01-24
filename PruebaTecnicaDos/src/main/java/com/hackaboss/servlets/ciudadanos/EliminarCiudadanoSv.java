@@ -31,8 +31,9 @@ public class EliminarCiudadanoSv extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id_ciudadano"));
+        
         try{
+            Long id = Long.parseLong(request.getParameter("id_ciudadano"));
             control.eliminarCiudadano(id);
             List<Ciudadano> listaCiudadanos = control.traerCiudadanos();
             HttpSession miSesion = request.getSession();

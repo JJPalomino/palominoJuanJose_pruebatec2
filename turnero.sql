@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3309
--- Tiempo de generación: 23-01-2025 a las 17:35:24
+-- Tiempo de generación: 24-01-2025 a las 06:22:56
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -31,7 +31,8 @@ CREATE TABLE `cita` (
   `ID` bigint(20) NOT NULL,
   `DESCRIPCION` varchar(255) DEFAULT NULL,
   `ESTADO` tinyint(1) DEFAULT 0,
-  `FECHA` datetime DEFAULT NULL,
+  `FECHA` date DEFAULT NULL,
+  `HORA` varchar(255) DEFAULT NULL,
   `ciudadano` bigint(20) DEFAULT NULL,
   `tramite` bigint(20) DEFAULT NULL,
   `id_cita` bigint(20) DEFAULT NULL
@@ -41,9 +42,9 @@ CREATE TABLE `cita` (
 -- Volcado de datos para la tabla `cita`
 --
 
-INSERT INTO `cita` (`ID`, `DESCRIPCION`, `ESTADO`, `FECHA`, `ciudadano`, `tramite`, `id_cita`) VALUES
-(1, 'Tramite de prueba', 1, '2025-01-24 10:33:33', 2, 10, 2),
-(2, 'Tramite de prueba 2', 1, '2025-01-28 09:00:00', 1, 2, 1);
+INSERT INTO `cita` (`ID`, `DESCRIPCION`, `ESTADO`, `FECHA`, `HORA`, `ciudadano`, `tramite`, `id_cita`) VALUES
+(1, 'Tramite de Pasaporte', 0, '2025-01-24', '10:00', 5, 1, NULL),
+(2, 'Obtención de documento fiscal', 0, '2025-01-24', '9:00', 1, 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -68,10 +69,12 @@ CREATE TABLE `ciudadano` (
 --
 
 INSERT INTO `ciudadano` (`ID`, `CURP`, `APELLIDO`, `DIRECCION`, `EMAIL`, `ESTADO`, `FECHANOCIMIENTO`, `NOMBRE`, `TELEFONO`) VALUES
-(1, 'PAJJ980729HVZLCN07', 'Palomino', 'Emilio Carranza 21', 'josepalomino_@outlook.com', 1, '2023-02-07', 'Juan Jose ', '2331263285'),
-(2, 'PAVF390720HVZLZR00', 'Gimenez', 'C. HONORABLE GALEANA SN', 'palominojuanjose577@gmail.com', 0, '2006-02-10', 'Pedro', '1245873254'),
-(4, 'PAVF390720HVZLZRgdsg', 'Aparicio', 'Emilio Carranza 21', 'mariagarsanchez0209@gmail.com', 1, '1992-06-26', 'Javier', '2285818364'),
-(6, 'No se puede modificar', 'Aparisc', 'Emilio Carranza 21', 'mariagarsanchez0209@gmail.com', 0, '1992-06-26', 'Javier', '2285818364');
+(1, 'PEGJ870315HDFRZN04', 'PÃ©rez', 'Calle Roble 123, Col. Centro, CDMX 06000', 'juan.perez@gmail.com', 1, '1991-11-20', 'Juan', ' 5512345678'),
+(2, 'ROSM920621MDFNRA07', 'RodrÃ­guez', 'Av. Libertad 456, Tijuana, BC 22000', 'maria.rodriguez@hotmail.com', 1, '2010-06-18', 'MarÃ­a', '6641098765'),
+(3, 'MAHC850914HDFRRR02', 'MartÃ­nez ', 'Calle Nogal 789, Monterrey, NL 64000', 'carlos.martinez@outlook.com', 1, '2008-03-02', 'Carlos', '8112344321'),
+(4, 'GALA901205MDFPRN05', 'GarcÃ­a', 'Paseo de las Flores 234, MÃ©rida, YucatÃ¡n 97000', 'ana.garcia@gmail.com', 1, '2004-04-30', 'Ana', '9932167890'),
+(5, 'RATM881130HDFMGR09', 'RamÃ­rez', 'Calzada del Sol 567, Guadalajara, Jalisco 44000', 'miguel.ramirez@yahoo.com', 1, '2001-10-11', 'Miguel', '3387654321'),
+(6, 'HEMS940703MDFRRR08', 'HernÃ¡ndez', 'Calle Olivo 678, CuliacÃ¡n, Sinaloa 80000', 'sofia.hernandez@gmail.com', 1, '1980-12-09', 'SofÃ­a', '6662345678');
 
 -- --------------------------------------------------------
 
@@ -91,12 +94,11 @@ CREATE TABLE `tramite` (
 --
 
 INSERT INTO `tramite` (`ID`, `DESCRIPCION`, `ESTADO`, `NOMBRETRAMITE`) VALUES
-(2, 'Este tramite sssss', 1, 'Consulta de recibo de luz'),
-(8, 'Este tramite permite a los usuarios acceder a su recibo de luz de manera rÃ¡pida y sencilla.', 0, 'Consulta de recibo de luz'),
-(9, 'Este tramite permite a los usuarios acceder a su recibo de luz de manera rÃ¡pida y sencilla.', 0, 'Consulta de recibo de luz'),
-(10, 'Este tramite permite a los usuarios acceder a su recibo de luz de manera rÃ¡pida y sencilla.', 0, 'Consulta de recibo de luz'),
-(11, 'dgsgregrsgs', 0, 'Consulta de recibo de luz'),
-(12, 'dgsgregrsgsgsrgrzgcshhhhh', 1, 'Consulta de recibo de luz');
+(1, 'Documento oficial que permite a ciudadanos mexicanos viajar al extranjero y acreditar su identidad internacional.', 1, 'Pasaporte Mexicano'),
+(2, 'AutorizaciÃ³n oficial que permite a un individuo conducir vehÃ­culos motorizados en territorio mexicano.', 1, 'Licencia de Conducir'),
+(3, 'Documento legal que certifica el nacimiento de una persona, registrando fecha, lugar y padres.', 1, 'Acta de Nacimiento'),
+(4, 'Registro que permite a trabajadores acceder a servicios de seguridad social, atenciÃ³n mÃ©dica y beneficios laborales.', 1, 'InscripciÃ³n al IMSS'),
+(5, 'TrÃ¡mite fiscal donde los ciudadanos reportan sus ingresos y pagan o solicitan devoluciÃ³n de impuestos.', 1, 'DeclaraciÃ³n Anual de Impuestos (SAT)');
 
 -- --------------------------------------------------------
 
@@ -115,8 +117,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`ID`, `EMAIL`, `PASSWORD`) VALUES
-(1, 'josejose_@hotmail.com', '12345'),
-(2, 'pedriogutierrez_outlook.com', 'e124578');
+(1, 'daniel.torres@yahoo.com', '123456'),
+(2, 'daniel.torres@yahoo.com', '789632');
 
 --
 -- Índices para tablas volcadas
@@ -170,7 +172,7 @@ ALTER TABLE `ciudadano`
 -- AUTO_INCREMENT de la tabla `tramite`
 --
 ALTER TABLE `tramite`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

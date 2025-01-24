@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+import org.eclipse.persistence.exceptions.DescriptorException;
 
 @Entity
 public class Cita implements Serializable {
@@ -23,8 +24,8 @@ public class Cita implements Serializable {
     private Boolean estado = true;
     private LocalDate fecha;
     private String hora;
+    private String descripcion;
  
-    
     @ManyToOne
     @JoinColumn(name= "tramite", referencedColumnName = "id")
     private Tramite tramite;
@@ -32,13 +33,14 @@ public class Cita implements Serializable {
     @ManyToOne
     @JoinColumn(name= "ciudadano", referencedColumnName = "id")
     private Ciudadano ciudadano;
-    
+
     public Cita() {
     }
 
-    public Cita(LocalDate fecha, String hora, Tramite tramite, Ciudadano ciudadano) {
+    public Cita(LocalDate fecha, String hora, String descripcion, Tramite tramite, Ciudadano ciudadano) {
         this.fecha = fecha;
         this.hora = hora;
+        this.descripcion = descripcion;
         this.tramite = tramite;
         this.ciudadano = ciudadano;
     }
@@ -51,11 +53,11 @@ public class Cita implements Serializable {
         this.id = id;
     }
 
-    public boolean isEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 
@@ -75,6 +77,14 @@ public class Cita implements Serializable {
         this.hora = hora;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     public Tramite getTramite() {
         return tramite;
     }
@@ -90,7 +100,7 @@ public class Cita implements Serializable {
     public void setCiudadano(Ciudadano ciudadano) {
         this.ciudadano = ciudadano;
     }
-
+    
     @PrePersist
     protected void prePersist(){
         if(this.estado == null){
@@ -98,6 +108,5 @@ public class Cita implements Serializable {
         }
     }
     
-
     
 }

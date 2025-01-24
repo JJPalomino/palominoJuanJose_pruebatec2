@@ -1,6 +1,6 @@
+<%@page import="com.hackaboss.logica.Ciudadano"%>
 <%@page import="com.hackaboss.logica.Cita"%>
 <%@page import="com.hackaboss.logica.Tramite"%>
-
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,7 +24,7 @@
                 background-color: #ffffff;
             }
 
-            .container {  /*Aumenta o reduce el contenido del recuadro donde va la cita*/
+            .container { 
                 max-width: 1200px;
                 margin: 20px auto;
                 background-color: #a6a6a6;
@@ -33,13 +33,13 @@
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             }
 
-            .header {  /*Tamaño del recuadro que contiene el mensaje de Gobiernod e Palomino*/
+            .header {  
                 background-color: #800000;
                 color: #ffffff;
                 padding: 41px 20px;
                 width: 100%;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                margin-bottom: 20px; /* Espacio entre la franja roja y el recuadro gris */
+                margin-bottom: 20px;
             }
 
             .header-content {
@@ -109,7 +109,7 @@
                 width: 100%;
             }
 
-            button:hover {   /*Estilo de boton*/
+            button:hover { 
                 background-color: #600000;
             }
 
@@ -139,9 +139,9 @@
             }
 
             .back-button {
-                position: absolute; /* Posición fija relativa a la barra */
-                top: 10px; /* Ajusta según el espacio que desees */
-                left: 10px; /* Ajusta según el espacio que desees */
+                position: absolute;
+                top: 10px; 
+                left: 10px; 
                 background-color: #ffffff;
                 color: #800000;
                 padding: 10px 15px;
@@ -172,6 +172,7 @@
                 <h2>Nueva Cita</h2>
                 <br>
                 <form action="CrearCitaSv" method="GET">
+                    <br>
                     <button type="submit">Nueva Cita</button>
                 </form>
                 <form action="CrearCitaSv" method="POST">
@@ -180,7 +181,6 @@
                             <label for="ciudadano">Ciudadano:</label>
                             <select id="ciudadano">
                                 <%
-                                    // Asegúrate de que la lista no sea null antes de iterar
                                     List<Ciudadano> listaCiudadanos = (List<Ciudadano>) request.getAttribute("listaCiudadanos");
                                     if (listaCiudadanos != null && !listaCiudadanos.isEmpty()) {
                                         for (Ciudadano ciudadano : listaCiudadanos) {
@@ -200,12 +200,11 @@
                             <label for="tramite">Trámite:</label>
                             <select id="tramite">
                                 <%
-                                    // Obtén la lista de trámites del request y verifica que no sea null
                                     List<Tramite> listaTramites = (List<Tramite>) request.getAttribute("listaTramites");
                                     if (listaTramites != null && !listaTramites.isEmpty()) {
                                         for (Tramite tramite : listaTramites) {
                                 %>
-                                <option value="<%= tramite.getNombreTramite()%>"><%= tramite.getDescripcion()%></option>
+                                <option value="<%= tramite.getDescripcion()%>"><%= tramite.getNombreTramite()%></option>
                                 <%
                                     }
                                 } else {
@@ -236,71 +235,81 @@
                                 <option value="04">04</option>
                             </select>
                         </div>
+                        
+                    </div>
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="descripcion">Descripción:</label>
+                            <input type="text" id="descripcion" name="descripcion" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="estado">Estado:</label>
+                            <select id="estado" name="estado" required>
+                                <option value="true">Activa</option>
+                                <option value="false">Inactiva</option>
+                            </select>
+                        </div>
                     </div>
                    <button type="submit">Registrar Ciudadano</button> 
                 </form>
             </div>
         </div>
+                            
+                            
     <div class="container">
             <div class="section active">
+ 
+                <form action="CrearCitaSv" method="GET">
+                <button type="submit" class="btn btn-primary">Mostrar</button>
+                    
+                </form>
+                
                 <h2>Lista de Citas</h2>
                 <br>
-                <form action="CrearCiudadanoSv" method="GET">
-                    <button type="submit" class="btn btn-primary">Mostrar</button>
-                    <div class="results-table mt-4">
-                        <table class="table">
-                            <thead>
+                <div class="results-table mt-4">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Ciudadano</th>
+                                <th>Tramite</th>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Estado</th>  
+                            </tr>    
+                        </thead>
+                        <tbody>
+                            <%
+                            List<Cita> listaCitas = (List) request.getSession().getAttribute("listaCitas");
+                            if (listaCitas != null) {
+
+                            for (Cita cita:listaCitas) {%>
                                 <tr>
-                                    <th>Estado</th>
-                                    <th>Fecha</th>
-                                    <th>Hora</th>
-                                    <th>Tramite</th>
-                                    <th>Ciudadano</th>
-                                </tr>    
-                            </thead>
-                            <tbody>
+                                    <td><%=cita.getCiudadano()%> </td>
+                                    <td><%=cita.getTramite()%> </td>
+                                    <td><%=cita.getFecha()%> </td>
+                                    <td><%=cita.getHora()%> </td>
+                                    <td><%=cita.getEstado()%> </td>
+
+                                    <td  style="display: flex; width: 230px;"> 
+
+                                        <form action="EliminarCitaSv" method="POST"> 
+                                            <input type="hidden" name="id_cita" value="<%=cita.getId()%>">
+                                            <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color:red; margin-right: 5px; "> 
+                                                <i class="fas fa-trash-alt"></i>Eliminar
+                                            </button>                 
+                                        </form>
+                                    </td>
+                                </tr>      
                                 <%
-                                List<Cita> listaCitas = (List) request.getSession().getAttribute("listaCitas");
-                                if (listaCitas != null) {
-
-                                for (Cita cita:listaCitas) {%>
-                                    <tr>
-                                        <td><%=cita.isEstado()%> </td>
-                                        <td><%=cita.getFecha()%> </td>
-                                        <td><%=cita.getHora()%> </td>
-                                        <td><%=cita.getTramite()%> </td>
-                                        <td><%=cita.getCiudadano()%> </td>
-
-                                        
-                                        <td  style="display: flex; width: 230px;"> 
-                                            
-                                            <form name="eliminar" action="EliminarCitaSv" method="POST"> 
-                                                <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color:red; margin-right: 5px; "> 
-                                                    <i class="fas fa-trash-alt"></i>Eliminar</button>
-                                                <input type="hidden" name="id_cita" value="<%=cita.getId()%>"> 
-                                            </form>
-
-                                            <form name="editar" action="EditarCitaSv" method="GET"> 
-                                                <button type="submit" class="btn btn-primary btn-user btn-block"; style="margin-left: 5px;"> 
-                                                    <i class="fas fa-pencil-alt"></i>Editar
-                                                </button>
-                                                <input type="hidden" name="id_cita" value="<%=cita.getId()%>"> <!-- esto es para mandar el codigo al servlet -->
-                                            </form> 
-
-                                        </td>
-                                    </tr>      
-                                    <%
-                                        }%>
-                                </tbody>  
-                                <%}%>
-                        </table>
-                    </div>  
-                </form>
+                                    }%>
+                            </tbody>  
+                            <%}%>
+                    </table>
+                </div>  
+                
             </div>
         </div>   
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                            
-                            
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>                    
     </body>
 </html>

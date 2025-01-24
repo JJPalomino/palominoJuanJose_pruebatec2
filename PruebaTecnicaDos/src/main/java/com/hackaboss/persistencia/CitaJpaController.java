@@ -1,3 +1,4 @@
+
 package com.hackaboss.persistencia;
 
 import com.hackaboss.logica.Cita;
@@ -82,6 +83,24 @@ public class CitaJpaController implements Serializable {
             if (em != null) {
                 em.close();
             }
+        }
+    }
+    
+    void softDelete(Long id) {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Cita cita = em.find(Cita.class, id);
+            if (cita != null) {
+                cita.setEstado(false);
+                em.merge(cita);
+            }
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            em.getTransaction().rollback();
+            throw ex;
+        } finally {
+            em.close();
         }
     }
 

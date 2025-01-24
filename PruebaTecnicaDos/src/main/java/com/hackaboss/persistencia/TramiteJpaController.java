@@ -165,10 +165,10 @@ public class TramiteJpaController implements Serializable {
         }
     }
 
-    Tramite findByTramite(String tramiteNombre) {
+    Tramite findByNombre(String tramiteNombre) {
         EntityManager em = getEntityManager();
         try {
-            String consulta = "SELECT t FROM Traemite t WHERE t.tramiteNombre = :NOMBRETRAMITE";
+            String consulta = "SELECT t FROM Tramite t WHERE t.nombreTramite = :NOMBRETRAMITE";
             Query query = em.createQuery(consulta);
             query.setParameter("NOMBRETRAMITE", tramiteNombre);
             return (Tramite) query.getSingleResult();
@@ -177,6 +177,6 @@ public class TramiteJpaController implements Serializable {
         } finally {
             em.close();
         }
-    }
+}
     
 }

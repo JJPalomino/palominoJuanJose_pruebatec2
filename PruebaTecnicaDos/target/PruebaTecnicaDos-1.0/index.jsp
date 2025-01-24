@@ -14,7 +14,7 @@
             background-color: #ffffff;
         }
 
-        header {  /*Tamaño del recuadro que contiene el mensaje de Gobiernod e Palomino*/
+        header { 
             background-color: #660000;
             color: #ffffff;
             padding: 41px 20px;
@@ -26,7 +26,7 @@
         header .logo {
             width: 100px;
             height: auto;
-            background-color: #cccccc; /* Espacio para el logo */
+            background-color: #cccccc;
         }
 
         header .title {
@@ -34,7 +34,7 @@
             font-weight: bold;
         }
         
-        .container {  /*Tamaño del recuadro de contenido*/
+        .container {  
             max-width: 1200px;
             margin: 0 auto;
             background-color: white;
@@ -43,15 +43,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .content {  /*Espacio entre el recuadro sombreado que contiene al mesnaje de Gestión de citas y el recuadro del gobierno*/
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin: 23px;
-        }
-
-        .hero {  /*Anchura del recuadro sombreado que contiene al mesnaje de Gestión de citas*/
+        .hero {  
             background-color: #f2f2f2;
             padding: 23px;
             width: 100%;
@@ -59,14 +51,14 @@
             border: 1px solid #cccccc;
         }
 
-        .categories {  /*Espacio entre la parte del mesaje de gestion de citas y los botones*/
+        .categories { 
             margin-top: 23px;
             display: flex;
             justify-content: center;
             gap: 20px;
         }
 
-        .category {    /*Tamaño de los botones*/
+        .category {   
             background-color: #f2f2f2;
             border: 2px solid #cccccc;
             padding: 15px;
@@ -92,35 +84,64 @@
         .category-button:hover {
             background-color: #450606;
         }
+        
+        .content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 23px;
+        }
+
+        .side-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .side-image img {
+            max-width: 200%;
+            max-height: 800px;
+        }
+
+        .main-content {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 20px;
+        }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">
-            <!-- Espacio para insertar el logo del Gobierno -->
-        </div>
         <div class="title">Gobierno de Palomino</div>
     </header>
-
-    
-    
     <div class="content">
-    <div class="hero">
-        <h1>Gestión de citas</h1>
-        <p>Seleccione el trámite que desea realizar:</p>
+    <div class="side-image">
+        <img src="Imagenes/flores.jpg" alt="Flor" onerror="console.log('Error loading image: /PruebaTecnicaDos/Web Pages/Imagenes/flor.jpg')">
     </div>
-    <div class="categories">
-        <% 
-            String[] categorias = {"Crear Cita", "Gestionar Ciudadanos", "Gestionar Tramites"};
-            for (String categoria : categorias) {
-        %>
-        <form action="CategoriasSv" method="post">
-            <input type="hidden" name="categoria" value="<%= categoria %>">
-            <button class="category-button" type="submit"><%= categoria %></button>
-        </form>
-        <% } %>
+
+    <div class="main-content">
+        <div class="hero">
+            <h1>Gestión de citas</h1>
+            <p>Seleccione el trámite que desea realizar:</p>
+        </div>
+        <div class="categories">
+            <%
+                String[] categorias = {"Crear Cita", "Gestionar Ciudadanos", "Gestionar Tramites"};
+                for (String categoria : categorias) {
+            %>
+            <form action="CategoriasSv" method="post">
+                <input type="hidden" name="categoria" value="<%= categoria%>">
+                <button class="category-button" type="submit"><%= categoria%></button>
+            </form>
+            <% }%>
+        </div>
+    </div>
+    <div class="side-image">
+        <img src="Imagenes/flores.jpg" alt="Flor" onerror="console.log('Error loading image: /PruebaTecnicaDos/Web Pages/Imagenes/flor.jpg')">
     </div>
 </div>
-
 </body>
 </html>

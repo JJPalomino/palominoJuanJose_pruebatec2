@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 @WebServlet(name = "CrearCitaSv", urlPatterns = {"/CrearCitaSv"})
@@ -31,45 +32,36 @@ public class CrearCitaSv extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Ciudadano> listaCiudadanos = control.traerCiudadanos();
-        if (listaCiudadanos == null) {
-            listaCiudadanos = new ArrayList<>(); 
-        }
+        List<Cita> citas = control.traerCitas();
         
-        List<Tramite> listaTramites = control.traterTramites();
-        if (listaTramites == null) {
-            listaTramites = new ArrayList<>(); // Evita que sea null para no generar excepciones
-        }
- 
-        request.setAttribute("listaCiudadanos", listaCiudadanos);
-        request.setAttribute("listaTramites", listaTramites);
-        
+        HttpSession miSesion = request.getSession();
+        miSesion.setAttribute("listaCitas", citas);
         request.getRequestDispatcher("registroCita.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String ciudadanoCURP = request.getParameter("ciudadano");
-        String tramiteNombre = request.getParameter("tramite");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate fecha = LocalDate.parse(request.getParameter("fecha"),formatter);
-        String hora = request.getParameter("hora");
-        if (ciudadanoCURP == null || ciudadanoCURP.isEmpty()
-                || tramiteNombre == null || tramiteNombre.isEmpty()
-                || hora == null || hora.isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Todos los campos son obligatorios");
-            return;
-        }else{
-            Ciudadano ciudadano = control.buscarCiudadanoCURP(ciudadanoCURP);
-            Tramite tramite = control.buscarTramiteNom(tramiteNombre);
 
-            Cita cita = new Cita(fecha, hora, tramite, ciudadano);
-            control.crearCita(cita);
-        
+        String CURP = request.getParameter("ciudadano");
+        String nombreTramite = request.getParameter("tramite");
+        LocalDate fecha = LocalDate.parse(request.getParameter("fecha"));
+        String hora = request.getParameter("hora");
+        String descripcion = request.getParameter("descripcion");
+        boolean estado = Boolean.parseBoolean(request.getParameter("estado"));
+
+        try {
+
+            control.crearCita(CURP, nombreTramite, fecha, hora, descripcion, estado);
+
+            response.sendRedirect("index.jsp");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "No se pudo registrar la cita");
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         }
-        
-        }
+    }
 
     @Override
     public String getServletInfo() {

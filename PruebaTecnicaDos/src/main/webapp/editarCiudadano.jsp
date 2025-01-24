@@ -21,7 +21,7 @@
                 background-color: #ffffff;
             }
 
-            .container {  /*Aumenta o reduce el contenido del recuadro donde va la cita*/
+            .container { 
                 max-width: 1500px;
                 margin: 20px auto;
                 background-color: #a6a6a6;
@@ -30,13 +30,13 @@
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             }
 
-            .header {  /*Tamaño del recuadro que contiene el mensaje de Gobiernod e Palomino*/
+            .header {  
                 background-color: #800000;
                 color: #ffffff;
                 padding: 41px 20px;
                 width: 100%;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                margin-bottom: 20px; /* Espacio entre la franja roja y el recuadro gris */
+                margin-bottom: 20px; 
             }
 
             .header-content {
@@ -96,7 +96,7 @@
                 gap: 10px;
             }
 
-            button {   /*Estilo del boton*/
+            button {   
                 background-color: #800000;
                 color: white;
                 padding: 10px 20px;
@@ -106,7 +106,7 @@
                 width: 100%;
             }
 
-            button:hover {   /*Estilo de boton*/
+            button:hover {  
                 background-color: #600000;
             }
 
@@ -136,9 +136,9 @@
             }
             
             .back-button {
-                position: absolute; /* Posición fija relativa a la barra */
-                top: 10px; /* Ajusta según el espacio que desees */
-                left: 10px; /* Ajusta según el espacio que desees */
+                position: absolute; 
+                top: 10px; 
+                left: 10px; 
                 background-color: #ffffff;
                 color: #800000;
                 padding: 10px 15px;
@@ -154,7 +154,6 @@
                 color: #ffffff;
             }
         </style>
-    
     </head>
     <body>
         <div class="header">
@@ -170,7 +169,7 @@
                 <br>
                 <form action="CrearCiudadanoSv" method="POST">
                     <%Ciudadano ciudadano = (Ciudadano) request.getSession().getAttribute("editar_ciudadano"); %>
-                        <div class="grid">
+                    <div class="grid">
                         <div class="form-group">
                             <label for="nombre">Nombre:</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese Nombre" value="<%=ciudadano.getNombre()%>">
@@ -211,10 +210,8 @@
                     </div>
                     <button type="submit">Guardar</button>    
                 </form>  
-        </div>
-              
+        </div>         
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
     </body>
 </html>

@@ -7,7 +7,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Creación de Tramites</title>
-        <!-- estilo de la web-->    
         <style>
             * {
                 margin: 0;
@@ -23,7 +22,7 @@
                 background-color: #ffffff;
             }
 
-            .container {  /*Aumenta o reduce el contenido del recuadro donde va la cita*/
+            .container {  
                 max-width: 1100px;
                 margin: 20px auto;
                 background-color: #a6a6a6;
@@ -32,13 +31,13 @@
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             }
 
-            .header {  /*Tamaño del recuadro que contiene el mensaje de Gobiernod e Palomino*/
+            .header { 
                 background-color: #800000;
                 color: #ffffff;
                 padding: 41px 20px;
                 width: 100%;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                margin-bottom: 20px; /* Espacio entre la franja roja y el recuadro gris */
+                margin-bottom: 20px; 
             }
 
             .header-content {
@@ -84,7 +83,7 @@
                 font-weight: bold;
             }
 
-            input, select {  /*Modifica el ancho de la ventanita en donde escribes*/
+            input, select { 
                 width: 100%;
                 padding: 8px;
                 border: 1px solid #ddd;
@@ -98,7 +97,7 @@
                 gap: 10px;
             }
 
-            button {   /*Estilo del boton*/
+            button {  
                 background-color: #800000;
                 color: white;
                 padding: 10px 15px;
@@ -110,7 +109,7 @@
                 display: block;
             }
 
-            button:hover {   /*Estilo de boton*/
+            button:hover {  
                 background-color: #600000;
             }
 
@@ -140,9 +139,9 @@
             }
             
             .back-button {
-                position: absolute; /* Posición fija relativa a la barra */
-                top: 10px; /* Ajusta según el espacio que desees */
-                left: 10px; /* Ajusta según el espacio que desees */
+                position: absolute; 
+                top: 10px;
+                left: 10px; 
                 background-color: #ffffff;
                 color: #800000;
                 padding: 10px 15px;
@@ -212,17 +211,17 @@
                                         <td><%=tra.getDescripcion()%> </td>
                                         <td  style="display: flex; width: 230px;"> 
                                             
-                                            <form name="eliminar" action="EliminarTramiteSv" method="POST"> <!-- esto es para mandar el codigo al servlet -->
+                                            <form name="eliminar" action="EliminarTramiteSv" method="POST"> 
                                                 <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color:red; margin-right: 5px; "> 
                                                     <i class="fas fa-trash-alt"></i>Eliminar</button>
-                                                <input type="hidden" name="id_tramite" value="<%=tra.getId()%>"> <!-- esto es para mandar el codigo al servlet -->
+                                                <input type="hidden" name="id_tramite" value="<%=tra.getId()%>"> 
                                             </form>
 
-                                            <form name="editar" action="EditarTramiteSv" method="GET"> <!-- esto es para mandar el codigo al servlet -->
+                                            <form name="editar" action="EditarTramiteSv" method="GET"> 
                                                 <button type="submit" class="btn btn-primary btn-user btn-block"; style="margin-left: 5px;"> 
                                                     <i class="fas fa-pencil-alt"></i>Editar
                                                 </button>
-                                                <input type="hidden" name="id_tramite" value="<%=tra.getId()%>"> <!-- esto es para mandar el codigo al servlet -->
+                                                <input type="hidden" name="id_tramite" value="<%=tra.getId()%>">
                                             </form> 
 
                                         </td>
@@ -237,7 +236,6 @@
                      
             </div>
         </div>
-                        <!-- Scripts de Bootstrap -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </body>

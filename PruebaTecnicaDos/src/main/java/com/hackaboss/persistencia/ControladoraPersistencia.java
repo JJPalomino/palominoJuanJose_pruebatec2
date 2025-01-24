@@ -66,16 +66,28 @@ public class ControladoraPersistencia {
         }
     }
 
-    public void crearCita(Cita cita) {
-        citaJpa.create(cita);
-    }
-
-    public Ciudadano crearCiudadanoCURP(String ciudadanoCURP) {
+    public Ciudadano buscarCiudadanoCURP(String ciudadanoCURP) {
         return ciudadanoJpa.findByCURP(ciudadanoCURP);
     }
 
     public Tramite buscarTramiteNom(String tramiteNombre) {
-        return tramiteJpa.findByTramite(tramiteNombre);
+        return tramiteJpa.findByNombre(tramiteNombre);
+    }
+      
+    public void crearCita(Cita cita) {
+        citaJpa.create(cita);
+    }
+
+    public List<Cita> traerCitas() {
+        return citaJpa.findCitaEntities();
+    }
+
+    public void eliminarCita(Long id) {
+        citaJpa.softDelete(id);
+    }
+
+    public Cita buscarCita(Long id) {
+        return citaJpa.findCita(id);
     }
 
 }

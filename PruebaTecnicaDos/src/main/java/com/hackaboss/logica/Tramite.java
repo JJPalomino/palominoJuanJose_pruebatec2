@@ -60,20 +60,11 @@ public class Tramite implements Serializable {
         this.estado = estado;
     }
 
-    @Override
-    public String toString() {
-        return "Tramite{" + "id=" + id + ", nombreTramite=" + nombreTramite + ", descripcion=" + descripcion + ", estado=" + estado + '}';
-    }
-
-   
- 
     @PrePersist
     protected void prePersist(){
         if(this.estado == null){
             this.estado = true;
         }
     }
-    
-   
 
 }

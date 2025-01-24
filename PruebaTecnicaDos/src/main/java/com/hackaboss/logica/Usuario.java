@@ -65,10 +65,5 @@ public class Usuario implements Serializable {
     public void setCitas(List<Cita> citas) {
         this.citas = citas;
     }
-
-    @Override
-    public String toString() {
-        return "Usuario{" + "id=" + id + ", email=" + email + ", password=" + password + ", citas=" + citas + '}';
-    }
     
 }
